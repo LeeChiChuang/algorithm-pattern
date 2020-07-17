@@ -1,5 +1,7 @@
 package dp
 
+import "log"
+
 // 120. 三角形最小路径和
 // 给定一个三角形，找出自顶向下的最小路径和。每一步只能移动到下一行中相邻的结点上。
 //
@@ -32,23 +34,26 @@ func dfs(triangle [][]int, i, j int) int {
 	if i == len(triangle) {
 		return 0
 	}
-
-	return min(dfs(triangle, i+1, j+1), dfs(triangle, i+1, j)) + triangle[i][j]
+	// log.Printf("i:%d \n", i)
+	// log.Printf("j:%d \n", j)
+	dfs1 := dfs(triangle, i+1, j)
+	dfs2 := dfs(triangle, i+1, j+1)
+	// log.Printf("dfs1:%d \n", dfs1)
+	// log.Printf("dfs2:%d \n", dfs2)
+	ret := min(dfs1, dfs2)
+	sum := triangle[i][j]
+	// log.Printf("ret i:%d \n", i)
+	// log.Printf("ret j:%d \n", j)
+	log.Printf("ret:%d \n", ret)
+	log.Printf("sum:%d \n", sum)
+	return ret + sum
 	/*
-	for ; i < len(triangle); i++ {
-		tmp := i + 1
-		for ; i < tmp; j++  {
-			val = triangle[i] + triangle[i][j]
-			recursion(triangle, i, j, val)
+		for ; i < len(triangle); i++ {
+			tmp := i + 1
+			for ; i < tmp; j++  {
+				val = triangle[i] + triangle[i][j]
+				recursion(triangle, i, j, val)
+			}
 		}
-	}
-	 */
-}
-
-func min(x, y int) int {
-	if x < y {
-		return  x
-	}
-
-	return  y
+	*/
 }
