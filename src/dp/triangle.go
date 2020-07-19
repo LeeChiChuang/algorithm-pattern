@@ -1,7 +1,5 @@
 package dp
 
-import "log"
-
 // 120. 三角形最小路径和
 // 给定一个三角形，找出自顶向下的最小路径和。每一步只能移动到下一行中相邻的结点上。
 //
@@ -44,8 +42,8 @@ func dfs(triangle [][]int, i, j int) int {
 	sum := triangle[i][j]
 	// log.Printf("ret i:%d \n", i)
 	// log.Printf("ret j:%d \n", j)
-	log.Printf("ret:%d \n", ret)
-	log.Printf("sum:%d \n", sum)
+	// log.Printf("ret:%d \n", ret)
+	// log.Printf("sum:%d \n", sum)
 	return ret + sum
 	/*
 		for ; i < len(triangle); i++ {
