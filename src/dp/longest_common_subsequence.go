@@ -1,5 +1,7 @@
 package dp
 
+import "math"
+
 // https://leetcode-cn.com/problems/longest-common-subsequence/
 // 1143. 最长公共子序列
 // 给定两个字符串 text1 和 text2，返回这两个字符串的最长公共子序列的长度。
@@ -46,7 +48,7 @@ func LongestCommonSubsequence(text1 string, text2 string) int {
 			return max(dp(i-1, j), dp(i, j-1))
 		}
 	}
-
+	math.Sqrt()
 	return dp(len(text1)-1, len(text2)-1)
 }
 

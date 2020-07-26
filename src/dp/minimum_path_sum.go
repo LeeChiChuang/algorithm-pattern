@@ -1,7 +1,6 @@
 package dp
 
 import (
-	"fmt"
 	"math"
 )
 
@@ -22,23 +21,41 @@ import (
 // 输出: 7
 // 解释: 因为路径 1→3→1→1→1 的总和最小。
 
-var minPathSum int
-
 func MinPathSum(grid [][]int) int {
-	minPathSum = math.MaxInt32
-	fmt.Println(grid)
 	return pathDfs(grid, 0, 0)
 }
 
 func pathDfs(grid [][]int, i, j int) int {
 	if i == len(grid) || j == len(grid[0]) {
-		return grid[i-1][j-1]
+		return math.MaxInt32
+	}
+	if i == len(grid)-1 && j == len(grid[0])-1 {
+		return grid[i][j]
 	}
 
 	right := pathDfs(grid, i, j+1)
 	down := pathDfs(grid, i+1, j)
+	return min(right, down) + grid[i][j]
+}
 
-	minPathSum = min(minPathSum, right+down)
+// 二维动态规划
 
-	return minPathSum
+func MinPathSum2(grid [][]int) int {
+	dp := make([][]int, len(grid))
+	for i:=len(grid)-1; i>=0; i-- {
+		dp[i] = make([]int, len(grid[i]))
+		for j:=len(grid[0]) - 1; j>=0; j-- {
+			if i == len(grid) - 1 && j != len(grid[0]) - 1 {
+				dp[i][j] = grid[i][j] + dp[i][j+1]
+			} else if j == len(grid[0]) - 1 && i != len(grid) - 1 {
+				dp[i][j] = grid[i][j] + dp[i+1][j]
+			} else if i != len(grid) - 1 && j != len(grid[0]) - 1 {
+				dp[i][j] = grid[i][j] + min(dp[i][j+1], dp[i+1][j])
+			} else {
+				dp[i][j] = grid[i][j]
+			}
+		}
+	}
+
+	return  dp[0][0]
 }
