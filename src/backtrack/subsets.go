@@ -26,6 +26,7 @@ func Subsets(nums []int) [][]int {
 	list := make([]int, 0)
 	subsetBackTrack(nums, 0, list, &result)
 
+	// [[],[1],[1,2],[1,2,3],[1,3],[2],[2,3],[3]]
 	return result
 }
 
